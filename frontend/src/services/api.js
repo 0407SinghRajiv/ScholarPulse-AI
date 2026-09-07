@@ -2,7 +2,9 @@
  * API Service for interacting with ScholarPulse AI Backend.
  */
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+  ? import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, '')
+  : '/api';
 
 export async function analyzePDF(file) {
   const formData = new FormData();

@@ -90,4 +90,14 @@ The goal of ScholarPulse AI is to reduce the time required to understand complex
 
 ---
 
+## 🌐 Cloud Deployment (Vercel & Render)
+
+ScholarPulse AI is production-ready for decoupled cloud deployment:
+- **Backend (FastAPI)**: Deploy to **Render** via Blueprint (`render.yaml`) or as a Python Web Service.
+- **Frontend (React + Vite)**: Deploy to **Vercel** (Set Root Directory to `frontend`).
+
+👉 For comprehensive step-by-step instructions, see the **[Deployment Guide](DEPLOYMENT.md)**.
+
+---
+
 **ScholarPulse AI — Transforming Research Papers into Meaningful Insights. 🚀**
