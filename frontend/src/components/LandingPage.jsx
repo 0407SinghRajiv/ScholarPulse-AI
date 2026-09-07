@@ -136,7 +136,7 @@ export default function LandingPage({
                 style={{ width: '22px', height: '22px', borderRadius: '6px', objectFit: 'cover' }}
               />
               <span className="badge-pill-text-long">ScholarPulse AI — Read Less • Understand More • Research Better</span>
-              <span className="badge-pill-text-short">ScholarPulse AI Research Engine</span>
+              <span className="badge-pill-text-short">AI Research Engine</span>
             </div>
 
             <h1 className="hero-display-title">

@@ -46,7 +46,8 @@ export default function Hero3DCanvas() {
       0.1,
       1000
     );
-    camera.position.set(0, 0, 8.8);
+    const initialCameraZ = typeof window !== 'undefined' && window.innerWidth < 640 ? 11.5 : 8.8;
+    camera.position.set(0, 0, initialCameraZ);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -473,6 +474,7 @@ export default function Hero3DCanvas() {
     const handleResize = () => {
       if (!container) return;
       camera.aspect = container.clientWidth / container.clientHeight;
+      camera.position.z = typeof window !== 'undefined' && window.innerWidth < 640 ? 11.5 : 8.8;
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
     };
@@ -543,21 +545,24 @@ export default function Hero3DCanvas() {
 
       {/* Clean 3D UI Control Toolbar */}
       <div
+        className="hero-3d-toolbar"
         style={{
           position: 'absolute',
-          bottom: '20px',
+          bottom: '16px',
           left: '50%',
           transform: 'translateX(-50%)',
           display: 'flex',
           alignItems: 'center',
-          gap: '8px',
-          background: 'rgba(15, 23, 42, 0.82)',
+          gap: '6px',
+          background: 'rgba(15, 23, 42, 0.85)',
           border: '1px solid rgba(255, 255, 255, 0.12)',
           backdropFilter: 'blur(16px)',
-          padding: '6px 12px',
+          padding: '4px 8px',
           borderRadius: '999px',
           zIndex: 10,
           boxShadow: '0 10px 30px rgba(0, 0, 0, 0.35)',
+          maxWidth: 'calc(100% - 20px)',
+          width: 'max-content',
         }}
       >
         <button
@@ -567,20 +572,21 @@ export default function Hero3DCanvas() {
             background: autoRotate ? 'rgba(59, 130, 246, 0.2)' : 'transparent',
             color: autoRotate ? '#60a5fa' : 'var(--text-muted)',
             border: autoRotate ? '1px solid rgba(59, 130, 246, 0.4)' : '1px solid transparent',
-            padding: '6px 14px',
+            padding: '5px 10px',
             borderRadius: '999px',
-            fontSize: '0.78rem',
+            fontSize: '0.74rem',
             fontWeight: 700,
             cursor: 'pointer',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '6px',
+            gap: '4px',
             transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap',
           }}
           title="Toggle ambient 3D auto-rotation"
         >
-          <RotateCw size={13} />
-          <span>{autoRotate ? 'Rotate: ON' : 'Rotate: Paused'}</span>
+          <RotateCw size={12} />
+          <span>{autoRotate ? 'Rotate: ON' : 'Paused'}</span>
         </button>
 
         <button
@@ -590,20 +596,21 @@ export default function Hero3DCanvas() {
             background: explodedMode ? 'rgba(139, 92, 246, 0.2)' : 'transparent',
             color: explodedMode ? '#c084fc' : 'var(--text-muted)',
             border: explodedMode ? '1px solid rgba(139, 92, 246, 0.4)' : '1px solid transparent',
-            padding: '6px 14px',
+            padding: '5px 10px',
             borderRadius: '999px',
-            fontSize: '0.78rem',
+            fontSize: '0.74rem',
             fontWeight: 700,
             cursor: 'pointer',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '6px',
+            gap: '4px',
             transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap',
           }}
           title="Expand or stack layered document sections"
         >
-          <Layers size={13} />
-          <span>{explodedMode ? 'Stack Layers' : 'Expand Layers'}</span>
+          <Layers size={12} />
+          <span>{explodedMode ? 'Stacked' : 'Layers'}</span>
         </button>
 
         <button
@@ -613,25 +620,27 @@ export default function Hero3DCanvas() {
             background: 'transparent',
             color: 'var(--text-muted)',
             border: '1px solid transparent',
-            padding: '6px 12px',
+            padding: '5px 8px',
             borderRadius: '999px',
-            fontSize: '0.78rem',
+            fontSize: '0.74rem',
             fontWeight: 700,
             cursor: 'pointer',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '6px',
+            gap: '4px',
             transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap',
           }}
           title="Reset document view orientation"
         >
-          <RefreshCw size={13} />
-          <span>Reset View</span>
+          <RefreshCw size={12} />
+          <span>Reset</span>
         </button>
       </div>
 
       {/* Subtle Interactive Instruction hint */}
       <div
+        className="desktop-only-badge"
         style={{
           position: 'absolute',
           top: '16px',
@@ -647,7 +656,7 @@ export default function Hero3DCanvas() {
         }}
       >
         <Sparkles size={12} style={{ color: 'var(--primary-blue)' }} />
-        <span>Interactive Document Preview (Drag to Orbit)</span>
+        <span>Interactive Preview</span>
       </div>
     </div>
   );
